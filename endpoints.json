@@ -1,0 +1,10 @@
+{
+  "default": {
+    "SessionService": "/redfish/v1/SessionService/Sessions",
+    "FirmwareInventory": "/redfish/v1/UpdateService/FirmwareInventory",
+    "StartUpdate": "/redfish/v1/UpdateService/Actions/UpdateService.StartUpdate",
+    "UpdateService": "/redfish/v1/UpdateService",
+    "ActiveBIOSTarget": "/redfish/v1/UpdateService/FirmwareInventory/ActiveBIOS",
+    "ActiveBMCTarget": "/redfish/v1/UpdateService/FirmwareInventory/ActiveBMC"
+  }
+}
