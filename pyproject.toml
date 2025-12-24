@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "redfish-client"
+version = "0.1.0"
+description = "Lightweight Redfish client and MCP service for firmware and system management."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "libiao" }]
+license = { text = "MIT" }
+dependencies = [
+  "requests>=2.31.0",
+  "loguru>=0.7.0",
+  "fastmcp>=0.2.6",
+]
+
+[project.optional-dependencies]
+extras = ["jsonpath>=0.82"]  # used by bmc_client/bmc.py (optional)
+
+[tool.uv]
+package = false
+dev-dependencies = []

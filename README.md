@@ -32,30 +32,32 @@ RedfishClient/
    └─ bmc.py                        # 另一个 Web API 会话客户端（可选/示例）
 ```
 
-## 安装依赖
+## 使用 uv 管理依赖与环境
 
-项目为纯 Python 库，无打包文件。直接安装运行所需依赖：
-
-```
-pip install requests loguru
-```
-
-若需要使用 `bmc_client/bmc.py` 中的辅助工具，额外安装：
-
-```
-pip install jsonpath
-```
+- 初始化并安装依赖：
+  - `uv sync`
+- 启动示例或服务：
+  - 示例：`uv run python -m main`
+  - MCP 服务：`uv run python -m mcp_server`
+- 添加依赖：
+  - 核心：`uv add requests loguru fastmcp`
+  - 可选：`uv add --optional jsonpath`
+- 升级依赖：
+  - 全量：`uv sync --upgrade`
+  - 指定：`uv add fastmcp@latest`
+- 导出依赖（供非 uv 环境使用）：
+  - `uv export -o requirements.txt`
 
 ## 快速开始
 
-以固件升级流程为例：
+以固件升级流程为例（使用 uv 运行）：
 
 ```python
 from redfish_client.client import RedfishClient
 from redfish_client.config import setup_logging, load_endpoints
 
 setup_logging(console_level='DEBUG')
-load_endpoints()  # 读取 endpoints.json
+load_endpoints()
 
 client = RedfishClient(
     host="<BMC_IP>", port=443,
@@ -84,7 +86,7 @@ if client.login():
     client.logout()
 ```
 
-更多示例可参考 `main.py`。
+更多示例可参考 `main.py`。运行方式：`uv run python -m main`
 
 ## 端点配置
 
@@ -144,4 +146,3 @@ if client.login():
 - 若对接不同厂商/平台，优先通过 `endpoints.json` 添加/修改端点，再在服务层扩展兼容逻辑。
 - 需要新增协议或传输方案时，实现 `TransportBase` 的子类并在 `RedfishClient` 中替换即可。
 - 严禁在代码中硬编码敏感信息；使用外部配置或环境变量传递凭证。
-
