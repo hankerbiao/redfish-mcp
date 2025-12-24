@@ -88,6 +88,16 @@ if client.login():
 
 更多示例可参考 `main.py`。运行方式：`uv run python -m main`
 
+启动后，可将 sse 服务地址配置到支持 MCP 服务的客户端中
+如：
+{
+  "redfish-client": {
+    "transport": "sse",
+    "url": "http://10.2.48.155:8000/sse"
+  }
+}
+📚 Docs:        https://gofastmcp.com  
+
 ## 端点配置
 
 通过 `endpoints.json` 定义不同 BMC 类型的端点映射：
